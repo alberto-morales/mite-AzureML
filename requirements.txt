@@ -4,3 +4,4 @@ azure-mgmt-authorization==0.60.0
 scikit-learn==0.21.3
 pandas
 azureml-contrib-run
+azureml
