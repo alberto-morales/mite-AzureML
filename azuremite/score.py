@@ -20,6 +20,8 @@ def init():
 
 def run(raw_data):
     df = pd.DataFrame(data)
+    jsonContent = pd.DataFrame.to_json(df, orient='split')
+    print(f"invocaremos con {jsonContent}")
     # make prediction
     y_hat = model.predict(df)
     # you can return any data type as long as it is JSON-serializable
