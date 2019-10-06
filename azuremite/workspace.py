@@ -9,7 +9,9 @@ def get_workspace():
     mllab6951918960 Microsoft.Storage/storageAccounts
     MLLab Microsoft.MachineLearningServices/workspace
     MLLab-resource-group Resource group
-    MLLab-K8s Nombre cluster kubernetes
+    MLLabK8s Nombre cluster kubernetes
+    myaks kubernetes service
+    mllabed19e1e6 Container Registry
               (MLLab-K8s es id de recurso, nombre del proceso myaks)
     """
     ws = Workspace.get(name="MLLab", subscription_id='a21d8af7-720a-451d-9010-9defcff47587', resource_group='MLLab-resource-group')
