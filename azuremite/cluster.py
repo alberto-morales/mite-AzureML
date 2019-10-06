@@ -1,6 +1,18 @@
 from azureml.core.compute import AksCompute, ComputeTarget
 from azuremite.workspace import get_workspace
 
+def get_cluster():
+    ws = get_workspace()
+    aks_name = 'myaks'
+    cts = ws.compute_targets
+    if aks_name in cts and cts[aks_name].type == 'AKS':
+       print('Found existing AKS cluster, will use it!')
+       aks_target = cts[aks_name]
+       return aks_target
+    else:
+       print('AKS cluster not found, sorry')
+       return None
+
 def create_cluster():
     ws = get_workspace()
     # Use the default configuration (can also provide parameters to customize)
@@ -33,6 +45,8 @@ def attach_cluster():
     return aks_target
 
 if __name__ == '__main__':
-    aks_target  = attach_cluster()
+    aks_target = get_cluster()
+    print(aks_target)
+    #aks_target  = attach_cluster()
     # aks_target = create_cluster()
     print("ok")

@@ -15,7 +15,6 @@ def get_model():
 def init():
     global model
     # retrieve the path to the model file using the model name
-    # model_path = os.path.join(os.getenv('AZUREML_MODEL_DIR'), 'sklearn_mnist_model.pkl')
     model = get_model()
 
 def run(raw_data):
