@@ -1,6 +1,7 @@
 from azuremite.workspace import get_workspace
 from azuremite.image import get_image
 from azuremite.cluster import get_cluster
+from azuremite.configuration import AKS_NAME
 
 from azureml.core.webservice import Webservice, AksWebservice
 from azureml.core.image import ContainerImage
@@ -12,15 +13,12 @@ def get_service():
 def deploy_image():
   ws = get_workspace() 
   azure_image = get_image()
- 
-  # Use the default configuration (can also provide parameters to customize)
-  #prov_config = AksCompute.provisioning_configuration()
 
   # Set the web service configuration (using default here with app insights)
   aks_config = AksWebservice.deploy_configuration(enable_app_insights=True)
 
   # Unique service name
-  service_name ='myaks'
+  service_name = AKS_NAME
 
   aks_target = get_cluster()
 

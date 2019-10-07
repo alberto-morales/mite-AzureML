@@ -1,9 +1,10 @@
 from azureml.core.compute import AksCompute, ComputeTarget
 from azuremite.workspace import get_workspace
+from azuremite.configuration import AKS_NAME, AKS_CLUSTER_NAME, RESOURCE_GROUP
 
 def get_cluster():
     ws = get_workspace()
-    aks_name = 'myaks'
+    aks_name = AKS_NAME
     cts = ws.compute_targets
     if aks_name in cts and cts[aks_name].type == 'AKS':
        print('Found existing AKS cluster, will use it!')
@@ -17,7 +18,7 @@ def create_cluster():
     ws = get_workspace()
     # Use the default configuration (can also provide parameters to customize)
     prov_config = AksCompute.provisioning_configuration()
-    aks_name = 'MLLabK8s'
+    aks_name = AKS_CLUSTER_NAME
 
     # Create the cluster
     aks_target = ComputeTarget.create(workspace=ws,
@@ -33,15 +34,15 @@ def create_cluster():
 
 def attach_cluster():
     # Set the resource group that contains the AKS cluster and the cluster name
-    resource_group = 'MLLab-resource-group'
-    cluster_name = 'MLLabK8s'
+    resource_group = RESOURCE_GROUP
+    cluster_name = AKS_CLUSTER_NAME
 
     # Attach the cluster to your workgroup. If the cluster has less than 12 virtual CPUs, use the following instead:
     attach_config = AksCompute.attach_configuration(resource_group = resource_group,
                                                     cluster_name = cluster_name,
                                                     cluster_purpose = AksCompute.ClusterPurpose.DEV_TEST)
     ws = get_workspace()
-    aks_target = ComputeTarget.attach(ws, 'myaks', attach_config) ## myaks ==> The name to associate with the Compute object
+    aks_target = ComputeTarget.attach(ws, AKS_NAME, attach_config)
     return aks_target
 
 if __name__ == '__main__':
