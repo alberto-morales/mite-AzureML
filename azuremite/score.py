@@ -5,8 +5,6 @@ from azuremite.model import get_model_path
 
 import pandas as pd
 
-from azureml.core.model import Model
-
 def get_model():
     model_path = get_model_path()
     _model = joblib.load(model_path)
